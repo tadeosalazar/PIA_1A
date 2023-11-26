@@ -3,9 +3,9 @@ $(document).ready(function () {
         event.preventDefault();
 
         // Obtener los datos del formulario
-        var nombre = $("#nombre").val();
-        var correo = $("#correo").val();
-        var contraseña = $("#contraseña").val();
+        var nom_usuario = $("#nom_usuario").val();
+        var correo_usuario = $("#correo_usuario").val();
+        var contraseña_usuario = $("#contraseña_usuario").val();
 
         // Validar los campos (puedes agregar más validaciones según tus necesidades)
 
@@ -15,9 +15,9 @@ $(document).ready(function () {
             type: "POST",
             url: "registro.php",
             data: {
-                nombre: nombre,
-                correo: correo,
-                contraseña: contraseña
+                nom_usuario: nom_usuario,
+                correo_usuario: correo_usuario,
+                contraseña_usuario: contraseña_usuario
             },
             success: function (data) {
                 // Mostrar el mensaje de registro exitoso después de un breve retraso
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
                 // Redirigir a la página de inicio después del registro exitoso (opcional)
                 setTimeout(function () {
-                    window.location.href = "index.html";
+                    window.location.href = "index.php";
                 }, 3000);
             },
             error: function () {

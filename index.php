@@ -26,20 +26,24 @@
                   <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Productos</a>
-                  </li>
                   <?php
-                      session_start();
-                      if (isset($_SESSION['user_id'])) {
-                          // Usuario autenticado
-                          echo '<li class="nav-item"><a class="nav-link" href="perfil.php">Mi Perfil</a></li>';
-                          echo '<li class="nav-item"><a class="nav-link" href="cerrar_sesion.php">Cerrar Sesión</a></li>';
-                      } else {
-                          // Usuario no autenticado
-                          echo '<li class="nav-item"><a class="nav-link" href="registrarse.html">Registrarse</a></li>';
-                          echo '<li class="nav-item"><a class="nav-link" href="iniciosesion.php">Iniciar Sesión</a></li>';
-                      }
+           session_start();
+           if (isset($_SESSION['user_id'])) {
+               // Usuario autenticado
+               echo '<li class="nav-item"><a class="nav-link" href="perfil.php">Mi Perfil</a></li>';
+               echo '<li class="nav-item"><a class="nav-link" href="cerrar_sesion.php">Cerrar Sesión</a></li>';
+               echo '<li class="nav-item"><a class="nav-link" href="ver_productos.php">Productos</a></li>';
+
+               // Verificación adicional para administrador
+               if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+                   echo '<li class="nav-item"><a class="nav-link" href="producto.php">Crear producto</a></li>';
+                   echo '<li class="nav-item"><a class="nav-link" href="descuentos.php">Crear Descuentos</a></li>';
+               }
+           } else {
+               // Usuario no autenticado
+               echo '<li class="nav-item"><a class="nav-link" href="registrarse.html">Registrarse</a></li>';
+               echo '<li class="nav-item"><a class="nav-link" href="iniciosesion.php">Iniciar Sesión</a></li>';
+           }
                   ?>
               </ul>
           </div>

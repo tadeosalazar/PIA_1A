@@ -31,6 +31,11 @@ if ($result->num_rows > 0) {
         session_start();
         $_SESSION['user_id'] = $row['id_usuario'];
 
+        // Verificación adicional para administrador
+        if ($row['correo_usuario'] == 'admin@correo.com' && $contraseña_usuario == 'admin') {
+            $_SESSION['admin'] = true;
+        }
+
         // Redirigir al usuario a la página de inicio
         header("Location: index.php");
         exit();
