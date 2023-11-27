@@ -1,0 +1,9 @@
+body {
+    padding-top: 56px; /* Ajuste para la barra de navegación */
+}
+.container {
+    margin-top: 50px;
+}
+.form-group {
+    margin-bottom: 20px;
+}

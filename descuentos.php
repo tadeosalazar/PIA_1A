@@ -35,9 +35,10 @@ include 'conexion.php';
            session_start();
            if (isset($_SESSION['user_id'])) {
                // Usuario autenticado
-               echo '<li class="nav-item"><a class="nav-link" href="perfil.php">Mi Perfil</a></li>';
+              
                echo '<li class="nav-item"><a class="nav-link" href="cerrar_sesion.php">Cerrar Sesión</a></li>';
                echo '<li class="nav-item"><a class="nav-link" href="ver_productos.php">Comprar</a></li>';
+               echo '<li class="nav-item"><a class="nav-link" href="comprar.php">Carrito</a></li>';
 
                // Verificación adicional para administrador
                if (isset($_SESSION['admin']) && $_SESSION['admin']) {
