@@ -109,7 +109,7 @@
         <div class="container">
           <div class="row">
               <div class="col-md-6">
-                  <h1>¿Quienes Encontraré?</h1>
+                  <h1>¿Que Encontraré?</h1>
                   <p>En Betterwere, te invitamos a explorar nuestro extenso 
                     catálogo de productos BetterWere cuidadosamente seleccionados. Desde 
                     innovadores dispositivos tecnológicos hasta accesorios de bienestar 
