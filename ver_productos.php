@@ -36,11 +36,13 @@
                             echo '<li class="nav-item"><a class="nav-link" href="cerrar_sesion.php">Cerrar Sesión</a></li>';
                             echo '<li class="nav-item"><a class="nav-link" href="ver_productos.php">Comprar</a></li>';
                             echo '<li class="nav-item"><a class="nav-link" href="comprar.php">Carrito</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="ver_reportes.php">Reportes</a></li>';
 
                             // Verificación adicional para administrador
                             if (isset($_SESSION['admin']) && $_SESSION['admin']) {
                                 echo '<li class="nav-item"><a class="nav-link" href="producto.php">Crear producto</a></li>';
                                 echo '<li class="nav-item"><a class="nav-link" href="descuentos.php">Crear Descuentos</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="reporte.php">Crear Reporte</a></li>';
                             }
                         } else {
                             // Usuario no autenticado

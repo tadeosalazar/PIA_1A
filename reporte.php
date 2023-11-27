@@ -1,44 +1,17 @@
-<?php
-session_start();
-include 'conexion.php';
-include 'funciones.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Procesar formulario de compra (dirección y método de pago)
-    $id_usuario = $_SESSION['user_id'];
-    $fecha = date("Y-m-d");
-    $direccion = $_POST['direccion'];
-    $metodo_de_pago = $_POST['metodo_de_pago'];
-
-    // Insertar en la tabla de pedido
-    $stmt = $conn->prepare("INSERT INTO pedido (id_usuario, fecha, direccion, metodo_de_pago) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param('isss', $id_usuario, $fecha, $direccion, $metodo_de_pago);
-
-    $stmt->execute();
-    $stmt->close();
-
-    // Limpiar el carrito después de la compra
-    unset($_SESSION['carrito']);
-
-    // Redireccionar a la página de inicio
-    header("Location: index.php");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--CSS Bootstrap-->
-    <link rel="stylesheet" href="css/styles2.css">
+    <title>CRUD Reporte</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reporte.css">
+    <!-- CSS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Compra</title>
 </head>
 <body>
-
- <!--NAVBAR-->
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <!--NAVBAR-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
           <a class="navbar-brand" href="#">
               <img src="img/betterware.png" alt="" width="40" height="34" class="d-inline-block align-text-top">
@@ -54,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </li>
 
                   <?php
+                   session_start();
                    if (isset($_SESSION['user_id'])) {
                        // Usuario autenticado
                        
@@ -77,50 +51,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
       </div>
   </nav>
+  <div class="container">
+        <h2>Registrar Reporte</h2>
+        <form action="registrar_reporte.php" method="post">
+            <div class="mb-3">
+                <label for="id_pedido" class="form-label">ID Pedido:</label>
+                <select id="id_pedido" name="id_pedido" class="form-select" required>
+                    <!-- Opciones dinámicas de la base de datos -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="2">3</option>
+                    <option value="2">4</option>
+                    <option value="2">5</option>
+                    <option value="2">6</option>
+                    <option value="2">7</option>
+                    <option value="2">8</option>
+                    <option value="2">9</option>
+                    <option value="2">10</option>
 
-    <!-- Contenido del carrito y formulario de compra -->
-    <div class="container">
-        <h2 class="text-center">Carrito de Compras</h2>
-        <ul>
-            <?php
-            if (isset($_SESSION['carrito'])) {
-                foreach ($_SESSION['carrito'] as $id_producto => $producto) {
-                    echo '<li>' . $producto['descripcion'] . ' - Cantidad: ' . $producto['cantidad'] . ' - Precio Unitario: $' . $producto['precio'] . '</li>';
-                }
-            }
-            ?>
-        </ul>
-
-        <p class="text-center">Total: $<?php echo number_format(calcular_total_carrito(), 2); ?></p>
-
-        <h2 class="text-center">Completa tu compra</h2>
-        <form method="post" action="comprar.php">
-            <div class="form-group">
-                <label for="direccion" class="form-label">Dirección de envío:</label>
-                <input type="text" name="direccion" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="metodo_de_pago" class="form-label">Método de pago:</label>
-                <select name="metodo_de_pago" class="form-select" required>
-                    <option value="debito">Tarjeta de Débito</option>
-                    <option value="credito">Tarjeta de Crédito</option>
-                    <option value="efectivo">Efectivo</option>
-                    <option value="paypal">PayPal</option>
+                    <!-- Agrega más opciones según sea necesario -->
                 </select>
             </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Confirmar Compra</button>
+            <div class="mb-3">
+                <label for="parametros" class="form-label">Parámetros:</label>
+                <textarea id="parametros" name="parametros" rows="4" class="form-control" required></textarea>
             </div>
+
+            <button type="submit" class="btn btn-success">Registrar</button>
         </form>
     </div>
+        <!-- JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- JS -->
 
-    <!--JQUERY-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!--JS-->
-
-    <!--Bootstrap-->
+    <!-- Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
